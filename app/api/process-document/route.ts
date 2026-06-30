@@ -1,5 +1,4 @@
 import { NextResponse, type NextRequest } from "next/server";
-import pdf from "pdf-parse"; // ✅ Import correct
 import mammoth from "mammoth";
 import { PresidioAnalyzerResult } from "@/app/config/entityLabels";
 
@@ -55,6 +54,7 @@ export async function POST(req: NextRequest) {
         const buffer = Buffer.from(await file.arrayBuffer());
         console.log("📦 Buffer créé, taille:", buffer.length);
 
+        const { default: pdf } = await import("pdf-parse");
         const data = await pdf(buffer);
         fileContent = data.text || "";
 
