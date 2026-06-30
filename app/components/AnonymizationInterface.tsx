@@ -118,8 +118,18 @@ export const AnonymizationInterface = ({
     if (outputText.includes("[REFERENCE_CONTRAT]")) {
       anonymizedTypes.add("Références de contrats");
     }
-    if (outputText.includes("[MARKET_SHARE]")) {
+    if (
+      outputText.includes("[MARKET_SHARE]") ||
+      outputText.includes("[PART_DE_MARCHE]") ||
+      /\[\d+(?:[.,]\d+)?-\d+(?:[.,]\d+)?\]%/.test(outputText)
+    ) {
       anonymizedTypes.add("Parts de marché");
+    }
+    if (
+      outputText.includes("[CHIFFRE_AFFAIRES]") ||
+      /\[\d[\d\s]*\s*-\s*\d[\d\s]*\]\s*(?:EUR|USD|GBP|CHF|€)/.test(outputText)
+    ) {
+      anonymizedTypes.add("Chiffres d'affaires");
     }
     if (
       outputText.includes("[ID_PROFESSIONNEL_BELGE]") ||
@@ -179,8 +189,8 @@ export const AnonymizationInterface = ({
     {
       items: [
         "Parts de marché",
+        "Chiffres d'affaires",
         "Secrets commerciaux",
-        "Références de contrats",
       ],
     },
     {
