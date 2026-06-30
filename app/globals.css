@@ -1,0 +1,97 @@
+@import "tw-animate-css";
+
+@import "tailwindcss";
+
+/* app/globals.css */
+/* ======================================================= */
+/* == STYLES MANUELS POUR L'APERÇU DU DOCUMENT DANS LA MODALE == */
+/* ======================================================= */
+
+/* Conteneur principal qui définit les styles par défaut */
+.preview-content {
+  color: #d1d5db; /* Texte gris clair par défaut */
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* --- TITRES --- */
+.preview-content h1,
+.preview-content h2,
+.preview-content h3,
+.preview-content h4 {
+  color: #f7ab6e; /* Couleur orange pour tous les titres */
+  font-weight: 700; /* Gras */
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  line-height: 1.2;
+}
+
+.preview-content h1 {
+  font-size: 2.5rem; /* Très grand */
+}
+
+.preview-content h2 {
+  font-size: 2rem; /* Grand */
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Ligne de séparation */
+}
+
+.preview-content h3 {
+  font-size: 1.5rem; /* Moyen */
+}
+
+.preview-content h4 {
+  font-size: 1.25rem; /* Petit */
+}
+
+/* --- TEXTE --- */
+.preview-content p {
+  margin-bottom: 1em;
+}
+
+.preview-content strong {
+  color: #ffffff; /* Texte en gras bien blanc pour ressortir */
+  font-weight: 700;
+}
+
+/* --- LISTES À PUCES --- */
+.preview-content ul {
+  list-style-type: disc; /* Activer les puces */
+  margin-left: 1.5em; /* Indentation */
+  margin-bottom: 1em;
+}
+
+.preview-content li {
+  margin-bottom: 0.5em;
+  padding-left: 0.5em;
+}
+
+/* Styliser la couleur de la puce elle-même ! */
+.preview-content li::marker {
+  color: #f7ab6e;
+}
+
+/* --- TABLEAUX --- */
+.preview-content table {
+  width: 100%;
+  margin-top: 1.5em;
+  border-collapse: collapse;
+}
+
+.preview-content th,
+.preview-content td {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75em 1em;
+  text-align: left;
+}
+
+.preview-content th {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Fond légèrement différent pour les en-têtes */
+  font-weight: 700;
+  color: #f7ab6e;
+}
