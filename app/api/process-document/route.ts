@@ -263,11 +263,13 @@ export async function POST(req: NextRequest) {
       console.log("✅ Anonymisation réussie.");
       console.log("✅ Texte anonymisé reçu de Presidio:", anonymizerResult.anonymized_text);
 
-      // Créer un mapping original_text -> valeur de remplacement réelle (fourchette ou label)
-      const replacementValues: Record<string, string> = {};
+      // Utiliser entities_found de /anonymize (positions exactes des entités réellement traitées)
+      // plutôt que analyzerResults du /analyze séparé — les deux analyses peuvent différer légèrement
+      const entitiesFound: PresidioAnalyzerResult[] = anonymizerResult.entities_found || analyzerResults;
       const replacementMap: Record<string, string> = anonymizerResult.replacement_map || {};
 
-      analyzerResults.forEach((result: PresidioAnalyzerResult) => {
+      const replacementValues: Record<string, string> = {};
+      entitiesFound.forEach((result: PresidioAnalyzerResult) => {
         const originalValue = fileContent.substring(result.start, result.end);
         replacementValues[originalValue] = replacementMap[originalValue] ?? `[${result.entity_type}]`;
       });
@@ -275,8 +277,8 @@ export async function POST(req: NextRequest) {
       const result = {
         text: fileContent,
         anonymizedText: anonymizerResult.anonymized_text,
-        piiCount: analyzerResults.length,
-        analyzerResults: analyzerResults,
+        piiCount: entitiesFound.length,
+        analyzerResults: entitiesFound,
         replacementValues: replacementValues,
         usePresidioText: true,
       };
